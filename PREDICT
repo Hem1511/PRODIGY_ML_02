@@ -1,0 +1,36 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+
+# Step 1: Data Preparation
+# Load the dataset
+data = pd.read_csv("house_prices_dataset.csv")
+
+# Preprocess the data (handle missing values, encode categorical variables)
+# Assuming preprocessing steps such as handling missing values and encoding categorical variables have been performed
+
+# Split the dataset into features (X) and target variable (y)
+X = data[['GrLivArea', 'BedroomAbvGr', 'FullBath']]
+y = data['SalePrice']
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Step 3: Model Training
+# Initialize the linear regression model
+model = LinearRegression()
+
+# Train the model
+model.fit(X_train, y_train)
+
+# Step 4: Model Evaluation
+# Evaluate the model's performance on the test set
+y_pred = model.predict(X_test)
+mse = mean_squared_error(y_test, y_pred)
+print("Mean Squared Error:", mse)
+
+# Step 5: Prediction
+# Use the trained model to predict house prices for new data
+# Assuming new data is available in a DataFrame called 'new_data'
+new_predictions = model.predict(new_data[['GrLivArea', 'BedroomAbvGr', 'FullBath']])
